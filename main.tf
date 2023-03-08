@@ -40,11 +40,12 @@ resource "random_pet" "vm-name" {
 }
 
 resource "vsphere_virtual_machine" "cloned_virtual_machine" {
-  #name             = "${var.vsphere_virtual_machine_name}"
-  name             = "${random_pet.vm-name.id}"
+  count             = 3
+  #name             = "${var.vsphere_virtual_machine_name}${count.index}"
+  name              = "${random_pet.vm-name.id}"
   #resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
-  resource_pool_id = "${data.vsphere_compute_cluster.cl.resource_pool_id}"
-  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+  resource_pool_id  = "${data.vsphere_compute_cluster.cl.resource_pool_id}"
+  datastore_id      = "${data.vsphere_datastore.datastore.id}"
 
   num_cpus = "${data.vsphere_virtual_machine.template.num_cpus}"
   memory   = "${data.vsphere_virtual_machine.template.memory}"
