@@ -1,1 +1,1 @@
-# terraform-vmware
+# terraform implementations with VmWare vSphere provider
